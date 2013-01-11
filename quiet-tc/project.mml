@@ -1,0 +1,773 @@
+{
+  "bounds": [
+    -93.5339,
+    44.7341,
+    -92.7978,
+    45.2256
+  ],
+  "center": [
+    -93.2544,
+    44.9667,
+    12
+  ],
+  "format": "png",
+  "interactivity": false,
+  "minzoom": 10,
+  "maxzoom": 14,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss",
+    "labels.mss",
+    "roads.mss",
+    "palette.mss"
+  ],
+  "Layer": [
+    {
+      "Datasource": {
+        "file": "./layers/water/water_polygons.shp"
+      },
+      "advanced": {},
+      "class": "water",
+      "extent": [
+        -180,
+        -85.051,
+        180,
+        85.051
+      ],
+      "geometry": "polygon",
+      "id": "ocean",
+      "name": "ocean",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs",
+      "srs-name": "WGS84"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "id": "landuse",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "project": "quiet-tc",
+        "srid": 900913,
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "( SELECT\n    way,\n    way_area AS area,\n    COALESCE(landuse, leisure, \"natural\", highway, amenity, tourism) AS type\n  FROM planet_osm_polygon\n  ORDER BY way_area DESC\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41512516186312,
+        32.531136160652274,
+        -114.13253581616009,
+        42.009360468634725
+      ],
+      "id": "landuse",
+      "name": "landuse",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "id": "water",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "project": "quiet-tc",
+        "srid": 900913,
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "( SELECT \"name\", \"natural\", \"landuse\", \"waterway\", \"way\"\n  FROM planet_osm_polygon\n  WHERE \"natural\" IN ('lake','water')\n  OR \"waterway\" IN ('canal','mill_pond','riverbank')\n  OR \"landuse\" IN ('basin','reservoir','water')\n  ORDER BY z_order asc\n) AS water",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41512516186312,
+        32.531136160652274,
+        -114.13253581616009,
+        42.009360468634725
+      ],
+      "geometry": "polygon",
+      "id": "water-polygons",
+      "name": "water-polygons",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, waterway AS type\n  FROM planet_osm_line\n  WHERE waterway IN ('river', 'canal', 'stream', 'ditch', 'drain')\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "water-lines-high",
+      "name": "water-lines-high",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, waterway AS type\n  FROM planet_osm_line\n  WHERE waterway IN ('river', 'canal', 'stream')) as data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "water-lines-medium",
+      "name": "water-lines-medium",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, waterway AS type\n  FROM planet_osm_line\n  WHERE waterway IN ('river', 'canal')\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "water-lines-low",
+      "name": "water-lines-low",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way,building,aeroway\nFROM planet_osm_polygon\nWHERE (\"building\" IS NOT NULL\nAND \"building\" != 'no')\nOR \"aeroway\" IN ('terminal')\nORDER BY z_order asc ) AS building",
+        "type": "postgis",
+        "user": ""
+      },
+      "class": "building",
+      "geometry": "polygon",
+      "id": "building",
+      "name": "building",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, aeroway AS type\n  FROM planet_osm_line\n  WHERE aeroway IN ('apron', 'runway', 'taxiway')\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "aeroway",
+      "name": "aeroway",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "(SELECT way \n  FROM planet_osm_point \n  WHERE highway = 'turning_circle') as data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41366678268132,
+        32.53201179595868,
+        -114.13386428411252,
+        42.00450369520372
+      ],
+      "geometry": "point",
+      "id": "turning-circle-case",
+      "name": "turning-circle-case",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "(SELECT \n    way,\n    COALESCE(highway, railway) AS type,\n    0 AS tunnel,\n    0 AS bridge,\n    CASE WHEN highway IN ('motorway', 'trunk') THEN 1 ELSE 0 END as motorway,\n    access,\n    'fill' AS render,\n  CASE\n    WHEN highway IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN highway IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary',\n        'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN highway IN ('service', 'track') THEN 'service'\n    WHEN highway IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN railway IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' \n  END AS stylegroup\n  FROM planet_osm_line\n    WHERE (highway IS NOT NULL OR railway IS NOT NULL)\n    AND (tunnel IS NULL OR tunnel = 'no')\n    AND (bridge IS NULL OR bridge = 'no')\n  ORDER BY z_order) as data\n",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "roads-high",
+      "name": "roads-high",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "(SELECT \n    way,\n    COALESCE(highway, railway) AS type,\n    0 AS tunnel,\n    0 AS bridge,\n    CASE WHEN highway IN ('motorway', 'trunk') THEN 1 ELSE 0 END as motorway,\n    access,\n    'fill' AS render,\n  CASE\n    WHEN highway IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN highway IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary',\n        'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN highway IN ('service', 'track') THEN 'service'\n    WHEN highway IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN railway IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' \n  END AS stylegroup\n  FROM planet_osm_line\n    WHERE (highway IS NOT NULL OR railway IS NOT NULL)\n    AND (tunnel IS NULL OR tunnel = 'no')\n    AND (bridge IS NULL OR bridge = 'no')\n    AND highway IN ('motorway', 'motorway_link', 'trunk', 'trunk_link', 'primary', 'primary_link', 'secondary', 'secondary_link', 'tertiary')\n  ORDER BY z_order) as data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.90590309850906,
+        14.480761560755488,
+        -92.33964220236187,
+        43.6166289350576
+      ],
+      "geometry": "linestring",
+      "id": "roads-mid",
+      "name": "roads-mid",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "(SELECT way, highway AS type\n  FROM planet_osm_roads\n  WHERE highway IN ('motorway', 'trunk', 'primary', 'secondary', 'motorway_link', 'trunk_link')) as data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.40969071372031,
+        32.531329743965394,
+        -114.13159294443788,
+        42.009498970614125
+      ],
+      "geometry": "linestring",
+      "id": "roads-medium",
+      "name": "roads-medium",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, COALESCE(highway, railway) AS type, 0 AS bridge, access, render, layer, 1 as tunnel,\n  CASE\n    WHEN highway IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN highway IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN highway IN ('service', 'track') THEN 'service'\n    WHEN highway IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN railway IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM (\n    SELECT *, '1_outline' AS render FROM planet_osm_line\n    WHERE tunnel NOT IN ('', '0', 'no')\n    UNION ALL\n    SELECT *, '2_line' AS render FROM planet_osm_line\n    WHERE tunnel NOT IN ('', '0', 'no')\n    UNION ALL\n    SELECT *, '3_inline' AS render FROM planet_osm_line\n    WHERE tunnel NOT IN ('', '0', 'no')\n  ) AS tunnels\n  ORDER BY layer ASC, render ASC\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "tunnel",
+      "name": "tunnel",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, COALESCE(highway, railway) AS type, 1 AS bridge, access, render, layer, 0 as tunnel,\n  CASE\n    WHEN highway IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN highway IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN highway IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN highway IN ('service', 'track') THEN 'service'\n    WHEN highway IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN railway IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM (\n    SELECT *, '1_outline' AS render FROM planet_osm_line\n    WHERE bridge NOT IN ('', '0', 'no')\n    UNION ALL\n    SELECT *, '2_line' AS render FROM planet_osm_line\n    WHERE bridge NOT IN ('', '0', 'no')\n    UNION ALL\n    SELECT *, '3_inline' AS render FROM planet_osm_line\n    WHERE bridge NOT IN ('', '0', 'no')\n  ) AS bridges\n  ORDER BY layer ASC, render ASC\n) AS data\n",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "bridge",
+      "name": "bridge",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way \n  FROM planet_osm_point\n  WHERE highway = 'turning_circle'\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41366678268132,
+        32.53201179595868,
+        -114.13386428411252,
+        42.00450369520372
+      ],
+      "geometry": "point",
+      "id": "turning-circle-fill",
+      "name": "turning-circle-fill",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( \nSELECT way,name,highway, \nchar_length(trim(both ' ' from regexp_replace(regexp_replace(ref, 'CA |US |I  |I|SR', ''), ';.*', ''))) as ref_len,\ntrim(both ' ' from regexp_replace(regexp_replace(ref, 'CA |US |I  |I|SR', ''), ';.*', '')) as ref, \nCASE WHEN oneway in\n  ('yes','true','1') THEN 'yes'::text END as oneway,\nCASE WHEN strpos(ref, 'I') != 0 THEN 'I'::text\n\tWHEN strpos(ref, 'US') != 0 THEN 'US'::text \n\tWHEN strpos(ref, 'CA') != 0 THEN 'CA'::text \n\tWHEN strpos(ref, 'SR') != 0 THEN 'SR'::text \nEND as \"type\"\nFROM planet_osm_line\nWHERE \"highway\" IS NOT NULL\nAND (\"name\" is not null or \"oneway\" is not null)\nORDER BY z_order ASC\n) as highway_label",
+        "type": "postgis",
+        "user": ""
+      },
+      "class": "shield",
+      "geometry": "linestring",
+      "id": "shields",
+      "name": "shields",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "id": "motorway-labels",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "project": "quiet-tc",
+        "srid": 900913,
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "( SELECT way, highway AS type, name, ref, oneway, CHAR_LENGTH(ref) AS reflen\n    FROM planet_osm_line\n    WHERE highway IN ('motorway', 'trunk')\n      AND (name IS NOT NULL OR ref IS NOT NULL)\n) AS data\n",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "motorway-labels",
+      "name": "motorway-labels",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, highway AS type, name, oneway\n  FROM planet_osm_line\n  WHERE (name IS NOT NULL OR oneway IN ('yes', 'true', '1', '-1'))\n    AND highway IN ('primary', 'secondary', 'tertiary')\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "mainroad-labels",
+      "name": "mainroad-labels",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "( SELECT way, highway AS type, name, oneway\n  FROM planet_osm_line\n  WHERE (name IS NOT NULL OR oneway IN ('yes', 'true', '1', '-1'))\n    AND highway IN ('residential', 'unclassified', 'road', 'living_street', 'unknown')\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41539735139418,
+        32.53089766483102,
+        -114.13002996567504,
+        42.00974547001752
+      ],
+      "geometry": "linestring",
+      "id": "minorroad-labels",
+      "name": "minorroad-labels",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "(SELECT name, way, 'line' as source\nFROM planet_osm_line\nWHERE waterway IN  ('river', 'canal', 'stream', 'ditch', 'drain')\nAND name IS NOT NULL\n\nUNION ALL\n\nSELECT name, way, 'polygon' as source\nFROM planet_osm_polygon\nWHERE \"waterway\" IN ('river', 'stream')\nOR \"natural\" IN ('lake','water')\nOR \"landuse\" IN ('basin','reservoir','water')\nAND name IS NOT NULL\n) as data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41512516186312,
+        32.531136160652274,
+        -114.13253581616009,
+        42.009360468634725
+      ],
+      "geometry": "linestring",
+      "id": "waterway-labels",
+      "name": "waterway-labels",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "file": "./layers/counties/tl_2010_27_county10.shp",
+        "id": "counties",
+        "project": "quiet-tc",
+        "srs": ""
+      },
+      "advanced": {},
+      "class": "places",
+      "extent": [
+        -97.23919599999999,
+        43.499361,
+        -89.483385,
+        49.384358
+      ],
+      "geometry": "polygon",
+      "id": "counties",
+      "name": "counties",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "",
+      "srs-name": "autodetect"
+    },
+    {
+      "Datasource": {
+        "file": "./layers/mapping_la_regions/la_county.shp",
+        "id": "regions",
+        "project": "quiet-tc",
+        "srs": ""
+      },
+      "advanced": {},
+      "class": "places",
+      "extent": [
+        -118.944864189,
+        33.2981919777,
+        -117.645604,
+        34.8231929991
+      ],
+      "geometry": "polygon",
+      "id": "regions",
+      "name": "regions",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "",
+      "srs-name": "autodetect",
+      "status": "off"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -93.32913859123781,
+        44.887619575688916,
+        -93.00326518752706,
+        45.05063214228572
+      ],
+      "id": "neighborhoods",
+      "class": "",
+      "Datasource": {
+        "file": "/Users/kevin/strib/osm-quiet-la/quiet-tc/layers/neighborhoods/neighborhoods_twin_cities.shp",
+        "id": "neighborhoods",
+        "project": "quiet-tc",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "neighborhoods"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -97.23919599999999,
+        43.499474,
+        -90.313243,
+        49.36163
+      ],
+      "id": "census-places",
+      "class": "places",
+      "Datasource": {
+        "file": "./layers/census-places/tl_2010_27_place10_population.shp"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "census-places"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "id": "landuse-labels",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "project": "quiet-tc",
+        "srid": 900913,
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "(\n  SELECT COALESCE(landuse, leisure, \"natural\", highway, amenity, tourism, military, religion, man_made, historic) AS type,\n    name, CAST(way_area as numeric)  AS area,\n    ST_PointOnSurface(way) AS way\n  FROM planet_osm_polygon\n  WHERE name IS NOT NULL\n  AND COALESCE(boundary, 'foo') <> 'administrative'\n    AND way && !bbox!\n    AND ST_IsValid(way)\n\n  UNION ALL\n\n  SELECT 'building' AS type, name, CAST(way_area as numeric)  AS area,\n    ST_PointOnSurface(way) AS way\n  FROM planet_osm_polygon\n  WHERE name IS NOT NULL\n    AND building NOT IN ('', 'no', '0', 'false')\n    AND way && !bbox!\n    AND ST_IsValid(way)\n  ORDER BY area DESC\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "places",
+      "extent": [
+        -124.41512516186312,
+        32.531136160652274,
+        -114.13253581616009,
+        42.009360468634725
+      ],
+      "id": "landuse-labels",
+      "name": "landuse-labels",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "name": "Quiet Twin Cities",
+  "description": "A quiet base layer for overlaying loud data about the Twin Cities",
+  "attribution": "Star Tribune, Los Angeles Times Data Desk",
+  "version": "0.1.0"
+}
