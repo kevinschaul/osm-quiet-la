@@ -4,12 +4,13 @@
   text-fill: @place_text;
   text-wrap-width: 30;
   text-line-spacing: 3;
-  text-placement: interior;
+  text-placement-type: simple;
+  text-placements: "N,S,E,W,10,8,6"; // TODO
   text-align: center;
   text-halo-fill: @place_halo;
   text-halo-radius: 1;
   text-size: 11;
-  text-min-distance:10;
+  text-min-distance: 10;
 }
 
 #counties[zoom>8][zoom<14] {
@@ -58,15 +59,21 @@
 #census-places[zoom>9] {
   [zoom=10][POP100>80000]{
     text-name:"[NAME10]";
-    text-size:12;
+    text-size:14;
   }
   [zoom=11][POP100>30000] {
     text-name:"[NAME10]";
-    text-size:12;
+    text-size:13;
+    [POP100>80000] {
+      text-size:14;
+    }
   }
   [zoom=12][POP100>10000] {
     text-name:"[NAME10]";
     text-size:13;
+    [POP100>80000] {
+      text-size:15;
+    }
   }
   [zoom=13][POP100>500] {
     text-name:"[NAME10]";
@@ -81,9 +88,12 @@
 
 #neighborhoods[zoom>=13] {
   text-face-name: @sans_light;
+  text-fill: @place_text * 0.6;
+  text-halo-fill: @place_halo * 0.9;
   text-name: "[NAME]";
-  [zoom=13] {text-size:11;}
-  [zoom=14] {text-size:15;}    
+// TODO Too many neighborhood labels at zoom=13
+//  [AREA>10] { text-size:12; }
+  [zoom=14] {text-size:13;}    
   [zoom>=15] {text-size:15;}
 }
 
@@ -103,11 +113,8 @@
     [type='park'][zoom>=10],
     [type='golf_course'][zoom>=10],
     [type='cemetery'][zoom>=10] {
-      text-fill: @park * 0.6;
+      text-fill: @park * 0.4;
       text-halo-fill: lighten(@park, 10);
-      // Skip these since they are also neighborhood names
-      [name='Griffith Park'] {text-name:"''";}
-      [name='Elysian Park'] {text-name:"''";}
     }
     [type='hospital'][zoom>=10] {
       text-fill: @hospital * 0.6;

@@ -100,3 +100,11 @@ Map {
   building-fill-opacity: 0.8;
   building-height:1.2;
 }
+
+/* COUNTIES */
+/*
+#counties {
+  line-color: @admin;
+  line-width:0.2;  
+}
+*/
