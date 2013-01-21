@@ -568,7 +568,7 @@
       "id": "neighborhoods",
       "class": "places",
       "Datasource": {
-        "file": "/Users/kevin/strib/guns/shapefiles/neighborhoods/neighborhoods_twin_cities.shp",
+        "file": "./layers/neighborhoods/neighborhoods_twin_cities.shp",
         "id": "neighborhoods",
         "project": "quiet-tc",
         "srs": ""
