@@ -1,19 +1,19 @@
 {
   "bounds": [
-    -93.5339,
-    44.7341,
-    -92.7978,
-    45.2256
+    -97.855,
+    43.11,
+    -88.8462,
+    49.5903
   ],
   "center": [
-    -93.2544,
-    44.9667,
-    12
+    -93.455,
+    46.4464,
+    7
   ],
   "format": "png",
   "interactivity": false,
-  "minzoom": 10,
-  "maxzoom": 14,
+  "minzoom": 0,
+  "maxzoom": 15,
   "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
   "Stylesheet": [
     "style.mss",
@@ -489,6 +489,97 @@
     },
     {
       "Datasource": {
+        "file": "./layers/counties/tl_2010_27_county10.shp",
+        "id": "counties",
+        "project": "quiet-tc",
+        "srs": ""
+      },
+      "advanced": {},
+      "class": "places",
+      "extent": [
+        -97.23919599999999,
+        43.499361,
+        -89.483385,
+        49.384358
+      ],
+      "geometry": "polygon",
+      "id": "counties",
+      "name": "counties",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "",
+      "srs-name": "autodetect"
+    },
+    {
+      "Datasource": {
+        "file": "./layers/mapping_la_regions/la_county.shp",
+        "id": "regions",
+        "project": "quiet-tc",
+        "srs": ""
+      },
+      "advanced": {},
+      "class": "places",
+      "extent": [
+        -118.944864189,
+        33.2981919777,
+        -117.645604,
+        34.8231929991
+      ],
+      "geometry": "polygon",
+      "id": "regions",
+      "name": "regions",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "",
+      "srs-name": "autodetect",
+      "status": "off"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -97.23919599999999,
+        43.499474,
+        -90.313243,
+        49.36163
+      ],
+      "id": "census-places",
+      "class": "places",
+      "Datasource": {
+        "file": "./layers/census-places/tl_2010_27_place10_population.shp",
+        "id": "census-places",
+        "project": "quiet-tc",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "census-places"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -93.32913859123781,
+        44.887619575688916,
+        -93.00326518752706,
+        45.05063214228572
+      ],
+      "id": "neighborhoods",
+      "class": "places",
+      "Datasource": {
+        "file": "/Users/kevin/strib/guns/shapefiles/neighborhoods/neighborhoods_twin_cities.shp",
+        "id": "neighborhoods",
+        "project": "quiet-tc",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "neighborhoods"
+    },
+    {
+      "Datasource": {
         "dbname": "osm_minnesota",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "",
@@ -509,6 +600,38 @@
         "cache-features": "true"
       },
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "srid": 900913,
+        "table": "(SELECT name, way, 'line' as source\nFROM planet_osm_line\nWHERE waterway IN  ('river', 'canal', 'stream', 'ditch', 'drain')\nAND name IS NOT NULL\n\nUNION ALL\n\nSELECT name, way, 'polygon' as source\nFROM planet_osm_polygon\nWHERE \"waterway\" IN ('river', 'stream')\nOR \"natural\" IN ('lake','water')\nOR \"landuse\" IN ('basin','reservoir','water')\nAND name IS NOT NULL\n) as data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "",
+      "extent": [
+        -124.41512516186312,
+        32.531136160652274,
+        -114.13253581616009,
+        42.009360468634725
+      ],
+      "geometry": "linestring",
+      "id": "waterway-labels",
+      "name": "waterway-labels",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -539,6 +662,40 @@
       "geometry": "linestring",
       "id": "motorway-labels",
       "name": "motorway-labels",
+      "properties": {
+        "cache-features": "true"
+      },
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm_minnesota",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "extent_cache": "auto",
+        "geometry_field": "",
+        "host": "localhost",
+        "id": "landuse-labels",
+        "key_field": "",
+        "password": "",
+        "port": "5432",
+        "project": "quiet-tc",
+        "srid": 900913,
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "(\n  SELECT COALESCE(landuse, leisure, \"natural\", highway, amenity, tourism, military, religion, man_made, historic) AS type,\n    name, CAST(way_area as numeric)  AS area,\n    ST_PointOnSurface(way) AS way\n  FROM planet_osm_polygon\n  WHERE name IS NOT NULL\n  AND COALESCE(boundary, 'foo') <> 'administrative'\n    AND way && !bbox!\n    AND ST_IsValid(way)\n\n  UNION ALL\n\n  SELECT 'building' AS type, name, CAST(way_area as numeric)  AS area,\n    ST_PointOnSurface(way) AS way\n  FROM planet_osm_polygon\n  WHERE name IS NOT NULL\n    AND building NOT IN ('', 'no', '0', 'false')\n    AND way && !bbox!\n    AND ST_IsValid(way)\n  ORDER BY area DESC\n) AS data",
+        "type": "postgis",
+        "user": ""
+      },
+      "advanced": {},
+      "class": "places",
+      "extent": [
+        -124.41512516186312,
+        32.531136160652274,
+        -114.13253581616009,
+        42.009360468634725
+      ],
+      "id": "landuse-labels",
+      "name": "landuse-labels",
       "properties": {
         "cache-features": "true"
       },
@@ -603,160 +760,6 @@
       "geometry": "linestring",
       "id": "minorroad-labels",
       "name": "minorroad-labels",
-      "properties": {
-        "cache-features": "true"
-      },
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
-    },
-    {
-      "Datasource": {
-        "dbname": "osm_minnesota",
-        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
-        "extent_cache": "auto",
-        "geometry_field": "",
-        "host": "localhost",
-        "key_field": "",
-        "password": "",
-        "port": "5432",
-        "srid": 900913,
-        "table": "(SELECT name, way, 'line' as source\nFROM planet_osm_line\nWHERE waterway IN  ('river', 'canal', 'stream', 'ditch', 'drain')\nAND name IS NOT NULL\n\nUNION ALL\n\nSELECT name, way, 'polygon' as source\nFROM planet_osm_polygon\nWHERE \"waterway\" IN ('river', 'stream')\nOR \"natural\" IN ('lake','water')\nOR \"landuse\" IN ('basin','reservoir','water')\nAND name IS NOT NULL\n) as data",
-        "type": "postgis",
-        "user": ""
-      },
-      "advanced": {},
-      "class": "",
-      "extent": [
-        -124.41512516186312,
-        32.531136160652274,
-        -114.13253581616009,
-        42.009360468634725
-      ],
-      "geometry": "linestring",
-      "id": "waterway-labels",
-      "name": "waterway-labels",
-      "properties": {
-        "cache-features": "true"
-      },
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
-    },
-    {
-      "Datasource": {
-        "file": "./layers/counties/tl_2010_27_county10.shp",
-        "id": "counties",
-        "project": "quiet-tc",
-        "srs": ""
-      },
-      "advanced": {},
-      "class": "places",
-      "extent": [
-        -97.23919599999999,
-        43.499361,
-        -89.483385,
-        49.384358
-      ],
-      "geometry": "polygon",
-      "id": "counties",
-      "name": "counties",
-      "properties": {
-        "cache-features": "true"
-      },
-      "srs": "",
-      "srs-name": "autodetect"
-    },
-    {
-      "Datasource": {
-        "file": "./layers/mapping_la_regions/la_county.shp",
-        "id": "regions",
-        "project": "quiet-tc",
-        "srs": ""
-      },
-      "advanced": {},
-      "class": "places",
-      "extent": [
-        -118.944864189,
-        33.2981919777,
-        -117.645604,
-        34.8231929991
-      ],
-      "geometry": "polygon",
-      "id": "regions",
-      "name": "regions",
-      "properties": {
-        "cache-features": "true"
-      },
-      "srs": "",
-      "srs-name": "autodetect",
-      "status": "off"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -93.32913859123781,
-        44.887619575688916,
-        -93.00326518752706,
-        45.05063214228572
-      ],
-      "id": "neighborhoods",
-      "class": "",
-      "Datasource": {
-        "file": "/Users/kevin/strib/osm-quiet-la/quiet-tc/layers/neighborhoods/neighborhoods_twin_cities.shp",
-        "id": "neighborhoods",
-        "project": "quiet-tc",
-        "srs": ""
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "neighborhoods"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -97.23919599999999,
-        43.499474,
-        -90.313243,
-        49.36163
-      ],
-      "id": "census-places",
-      "class": "places",
-      "Datasource": {
-        "file": "./layers/census-places/tl_2010_27_place10_population.shp"
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "census-places"
-    },
-    {
-      "Datasource": {
-        "dbname": "osm_minnesota",
-        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
-        "extent_cache": "auto",
-        "geometry_field": "",
-        "host": "localhost",
-        "id": "landuse-labels",
-        "key_field": "",
-        "password": "",
-        "port": "5432",
-        "project": "quiet-tc",
-        "srid": 900913,
-        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-        "table": "(\n  SELECT COALESCE(landuse, leisure, \"natural\", highway, amenity, tourism, military, religion, man_made, historic) AS type,\n    name, CAST(way_area as numeric)  AS area,\n    ST_PointOnSurface(way) AS way\n  FROM planet_osm_polygon\n  WHERE name IS NOT NULL\n  AND COALESCE(boundary, 'foo') <> 'administrative'\n    AND way && !bbox!\n    AND ST_IsValid(way)\n\n  UNION ALL\n\n  SELECT 'building' AS type, name, CAST(way_area as numeric)  AS area,\n    ST_PointOnSurface(way) AS way\n  FROM planet_osm_polygon\n  WHERE name IS NOT NULL\n    AND building NOT IN ('', 'no', '0', 'false')\n    AND way && !bbox!\n    AND ST_IsValid(way)\n  ORDER BY area DESC\n) AS data",
-        "type": "postgis",
-        "user": ""
-      },
-      "advanced": {},
-      "class": "places",
-      "extent": [
-        -124.41512516186312,
-        32.531136160652274,
-        -114.13253581616009,
-        42.009360468634725
-      ],
-      "id": "landuse-labels",
-      "name": "landuse-labels",
       "properties": {
         "cache-features": "true"
       },

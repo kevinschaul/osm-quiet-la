@@ -6,11 +6,11 @@ Configures this MapBox project to work with your local PostGIS server.
 #
 
 # PostGIS connection setup
-dbname   = "osm_california"
+dbname   = "osm_minnesota"
 host     = "localhost"
 port     = "5432"
-user     = "postgres"
-password = "postgres"
+user     = ""
+password = ""
 
 
 # For postgres layers mapnik by default will query postgis for the
@@ -19,7 +19,8 @@ password = "postgres"
 # specifying a bounding box in the format of "XMIN,YMIN,XMAX,YMAX" in the
 # same units as the database (probably spherical mercator meters). The
 # whole world is "-20037508.34,-20037508.34,20037508.34,20037508.34".
-extent = "-13849828.38,3833234.22,-12705175.77,5162381.7"
+#extent = "-13849828.38,3833234.22,-12705175.77,5162381.7"
+extent = "-20037508.34,-20037508.34,20037508.34,20037508.34"
 
 # osm2pgsql table prefix - only change this is you explicitly imported
 # with a custom prefix (--prefix)

@@ -13,7 +13,7 @@
   text-min-distance: 10;
 }
 
-#counties[zoom>8][zoom<14] {
+#counties[zoom>9][zoom<14] {
   text-name:"[NAMELSAD10]";
   text-face-name: @sans;
   text-transform: uppercase;
@@ -37,6 +37,8 @@
   }
 }
 
+/* We don't have regions for Minnesota */
+/*
 #regions[zoom>=9][zoom<12] {
   text-name:"[Name]";
   text-face-name: @sans;
@@ -55,9 +57,14 @@
     text-wrap-width: 60;
   }
 }
+*/
 
-#census-places[zoom>9] {
-  [zoom=10][POP100>80000]{
+#census-places {
+  [zoom=9][POP100>80000] {
+    text-name:"[NAME10]";
+    text-size:14;
+  }
+  [zoom=10][POP100>80000] {
     text-name:"[NAME10]";
     text-size:14;
   }
